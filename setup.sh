@@ -12,11 +12,15 @@ sed -i 's/dl-4.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 apk update
 
 # ### Go语言开发环境 ###
-apk add --no-cache go git # make dep
+apk add --no-cache musl-dev make git go dep
 
 cat>>/etc/profile<<EOF
 
 # golang
 export GOPROXY=https://goproxy.cn
+export GOPATH=/home/vagrant/go
+export PATH=\$GOPATH/bin:\$PATH
 
 EOF
+
+sudo -u vagrant go get -u github.com/gpmgo/gopm
